@@ -55,26 +55,28 @@ def validate_data(values):
 
     return True
 
-# def update_sales_worksheet(data):
-#     '''
-#     update sales worksheet, add new row with the list data provided.
-#     '''
+'''
+def update_sales_worksheet(data):
+    
+    update sales worksheet, add new row with the list data provided.
+    
 
-#     print("Updating sales worksheet...\n")
-#     sales_worksheet = SHEET.worksheet("sales")
-#     sales_worksheet.append_row(data)
-#     print("Sales worksheet updated succesfully.\n")
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated succesfully.\n")
 
-# def update_surplus_worksheet(data):
-#     '''
-#     update surplus worksheet, adds a new row with new surplus data
-#     '''
+def update_surplus_worksheet(data):
+    
+    update surplus worksheet, adds a new row with new surplus data
+    
 
-#     print("Updating surplus worksheet...\n")
-#     surplus_worksheet = SHEET.worksheet("surplus")
-#     surplus_worksheet.append_row(data)
-#     print("Surplus worksheet updated succesfully.\n")
-
+    print("Updating surplus worksheet...\n")
+     surplus_worksheet = SHEET.worksheet("surplus")
+     surplus_worksheet.append_row(data)
+     print("Surplus worksheet updated succesfully.\n")
+'''
+#following code is a function that uses re-factoring to amalgamate the above functions into one and reduce repetition
 def update_worksheet(data, worksheet):
     '''
     updates both surplus and sales worksheet, adds a new row with new surplus/sales data
@@ -106,8 +108,22 @@ def calculate_surplus_data(sales_row):
 
     return surplus_data
 
+def get_last_5_entries_sales():
+    """ 
+    collects columns of data from sales worksheet, 
+    colllecting the last 5 entries for each sandwich
+    and returns the data as a list of lists.
+    """
 
-
+    sales = SHEET.worksheet("sales")
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    return columns
+    
+    
+    pprint(columns)
 
 def main():
     '''
@@ -121,5 +137,9 @@ def main():
     update_worksheet(new_surplus_data, "surplus")
 
 print("Welcome to Love Sandwiches Data Automation")
-main()
+# main()
 
+
+
+
+sales_columns = get_last_5_entries_sales()
