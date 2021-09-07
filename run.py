@@ -143,9 +143,11 @@ def get_stock_values(data):
     headings = SHEET.worksheet("stock").row_values(1)
     
     
-    my_dictionary = {i:j for i, j in zip(headings, data)}
+    stock_dictionary = {i:j for i, j in zip(headings, data)}
     
-    print(my_dictionary)
+    
+
+    print (f"Make the following numbers of sandwiches for the next market: \n {stock_dictionary}")
 
 
 
